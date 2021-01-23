@@ -38,8 +38,13 @@ void CDataStructs_List_Destroy(CDataStructs_List* list, void(*freeMethod)(void* 
 
     if (freeMethod)
     {
-        for (UINT32 i = 0; i < list->length; i++)
+        for (UINT32 i = list->length - 1; i > -1; i--)
+        {
+            if (!list->items[i])
+                continue;
+                
             freeMethod(list->items[i]);
+        }
     }
 
     free(list);
@@ -92,6 +97,59 @@ void CDataStructs_List_AppendDuplicate(CDataStructs_List* list, void* item)
     if (!item)
     {
         CDataStructs_LogError("List Append", "Item is NULL can not append to List!");
+        return;
+    }
+
+    //empty
+    if (!list->items)
+    {
+        list->length++;
+        list->items = calloc(1, list->itemSize);
+        list->items[0] = item;
+    }
+    //if has data
+    else
+    {
+        list->length++;
+        list->items = realloc(list->items, list->length * list->itemSize);
+        list->items[list->length - 1] = item;
+    }
+}
+
+void CDataStructs_List_AppendNull(CDataStructs_List* list, void* item)
+{
+    if (!list)
+    {
+        CDataStructs_LogError("List Append", "List is NULL can not append data!");
+        return;
+    }
+
+    //empty
+    if (!list->items)
+    {
+        list->length++;
+        list->items = calloc(1, list->itemSize);
+        list->items[0] = item;
+    }
+    //if has data
+    else
+    {
+        if (!CDataStructs_List_IsItem(list, item, FALSE))
+        {
+            list->length++;
+            list->items = realloc(list->items, list->length * list->itemSize);
+            list->items[list->length - 1] = item;
+        }
+        else
+            CDataStructs_LogWarning("List Append Duplicate", "The List already contains that item, if you wish to add the same item uses \"AppendDuplicate\".");
+    }
+}
+
+void CDataStructs_List_AppendNullDuplicate(CDataStructs_List* list, void* item)
+{
+    if (!list)
+    {
+        CDataStructs_LogError("List Append", "List is NULL can not append data!");
         return;
     }
 

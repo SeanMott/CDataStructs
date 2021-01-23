@@ -24,10 +24,14 @@ CDataStructs_List* CDataStructs_List_Create(size_t itemSize);
 //destroys a List
 void CDataStructs_List_Destroy(CDataStructs_List* list, void(*freeMethod)(void* item));
 
-//appends a item to the List || stops duplicates
+//appends a item to the List || stops duplicates and NULL items
 void CDataStructs_List_Append(CDataStructs_List* list, void* item);
-//appends a item to the List || allows a duplicate
+//appends a item to the List || allows a duplicate and stops Null items
 void CDataStructs_List_AppendDuplicate(CDataStructs_List* list, void* item);
+//appends a item to the List || stops duplicates and allows NULL items
+void CDataStructs_List_AppendNull(CDataStructs_List* list, void* item);
+//appends a item to the List || allows duplicates and NULL items
+void CDataStructs_List_AppendNullDuplicate(CDataStructs_List* list, void* item);
 //removes a item from the List
 void CDataStructs_List_RemoveItem(CDataStructs_List* list, void* item, void(*freeMethod)(void*));
 //removes a item by position from the List
