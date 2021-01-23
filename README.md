@@ -6,7 +6,7 @@ A collection of differnt data structures for C. Sources for info on making the s
 
 # Sources
 
-- (Ianertson || Dynamic list in C)[https://www.youtube.com/watch?v=QKZXQc8EBDk&t=1004s]
+- [Ianertson || Dynamic list in C](https://www.youtube.com/watch?v=QKZXQc8EBDk&t=1004s)
 
 # Building
 Builds with Premake5, script is provided in the root directory.
