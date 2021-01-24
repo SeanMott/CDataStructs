@@ -3,7 +3,7 @@
 #include <CDataStructs\Logger.h>
 
 //shifts items left in Lists
-static inline void CDataStructs_List_ShiftItemsLeft(CDataStructs_List* list, INT32 index)
+static inline void CDataStructs_List_ShiftItemsLeft(CDataStructs_List* list, int32_t index)
 {
     if (!list || index >= list->length || index <= -1)
         return;
@@ -38,7 +38,7 @@ void CDataStructs_List_Destroy(CDataStructs_List* list, void(*freeMethod)(void* 
 
     if (freeMethod)
     {
-        for (UINT32 i = list->length - 1; i > -1; i--)
+        for (uint32_t i = list->length - 1; i > -1; i--)
         {
             if (!list->items[i])
                 continue;
@@ -75,7 +75,7 @@ void CDataStructs_List_Append(CDataStructs_List* list, void* item)
     //if has data
     else
     {
-        if (!CDataStructs_List_IsItem(list, item, FALSE))
+        if (!CDataStructs_List_IsItem(list, item, false))
         {
             list->length++;
             list->items = realloc(list->items, list->length * list->itemSize);
@@ -134,7 +134,7 @@ void CDataStructs_List_AppendNull(CDataStructs_List* list, void* item)
     //if has data
     else
     {
-        if (!CDataStructs_List_IsItem(list, item, FALSE))
+        if (!CDataStructs_List_IsItem(list, item, false))
         {
             list->length++;
             list->items = realloc(list->items, list->length * list->itemSize);
@@ -189,7 +189,7 @@ void CDataStructs_List_RemoveItem(CDataStructs_List* list, void* item, void(*fre
         return;
     }
 
-    INT32 pos = CDataStructs_List_ItemPosition(list, item, FALSE);
+    int32_t pos = CDataStructs_List_ItemPosition(list, item, false);
     if (pos == -1)
     {
         CDataStructs_LogWarning("List Remove", "The List does not contain the give item, check the pointer or add it with \"Append\" or \"AppendDuplicate\" first.");
@@ -204,7 +204,7 @@ void CDataStructs_List_RemoveItem(CDataStructs_List* list, void* item, void(*fre
     list->items = realloc(list->items, list->itemSize * list->length);
 }
 
-void CDataStructs_List_RemovePos(CDataStructs_List* list, UINT32 pos, void(*freeMethod)(void*))
+void CDataStructs_List_RemovePos(CDataStructs_List* list, uint32_t pos, void(*freeMethod)(void*))
 {
     if (!list)
     {
@@ -234,33 +234,33 @@ void CDataStructs_List_RemovePos(CDataStructs_List* list, UINT32 pos, void(*free
     CDataStructs_LogMessage("CDataStructs_List_RemovePos is currently not supported. Check Github for updates.");
 }
 
-BOOL CDataStructs_List_IsItem(CDataStructs_List* list, void* item, BOOL checkValidPrams)
+bool CDataStructs_List_IsItem(CDataStructs_List* list, void* item, bool checkValidPrams)
 {
     if (checkValidPrams)
     {
         if (!list)
         {
             CDataStructs_LogError("List", "List is NULL can not check for the item, returning false!");
-            return FALSE;
+            return false;
         }
 
         if (!item)
         {
             CDataStructs_LogError("List", "Item is NULL can not check for the item, returning false!");
-            return FALSE;
+            return false;
         }
     }
 
-    for (UINT32 i = 0; i < list->length; i++)
+    for (uint32_t i = 0; i < list->length; i++)
     {
         if (list->items[i] == item)
-            return TRUE;
+            return true;
     }
 
-    return FALSE;
+    return false;
 }
 
-size_t CDataStructs_List_ItemPosition(CDataStructs_List* list, void* item, BOOL checkValidPrams)
+size_t CDataStructs_List_ItemPosition(CDataStructs_List* list, void* item, bool checkValidPrams)
 {
     if (checkValidPrams)
     {
@@ -277,7 +277,7 @@ size_t CDataStructs_List_ItemPosition(CDataStructs_List* list, void* item, BOOL 
         }
     }
 
-    for (UINT32 i = 0; i < list->length; i++)
+    for (uint32_t i = 0; i < list->length; i++)
     {
         if (list->items[i] == item)
             return i;

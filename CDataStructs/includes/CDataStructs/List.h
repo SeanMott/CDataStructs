@@ -9,7 +9,8 @@ Source: https://www.youtube.com/watch?v=QKZXQc8EBDk&t=1004s
 Author: Ianertson || Dynamic list in C
 */
 
-#include "DataTypes.h"
+#include <stdint.h>
+#include <stdbool.h>
 
 typedef struct
 {
@@ -35,12 +36,12 @@ void CDataStructs_List_AppendNullDuplicate(CDataStructs_List* list, void* item);
 //removes a item from the List
 void CDataStructs_List_RemoveItem(CDataStructs_List* list, void* item, void(*freeMethod)(void*));
 //removes a item by position from the List
-void CDataStructs_List_RemovePos(CDataStructs_List* list, UINT32 pos, void(*freeMethod)(void*));
+void CDataStructs_List_RemovePos(CDataStructs_List* list, uint32_t pos, void(*freeMethod)(void*));
 
 //finds if a item is in the List
-BOOL CDataStructs_List_IsItem(CDataStructs_List* list, void* item, BOOL checkValidPrams);
+bool CDataStructs_List_IsItem(CDataStructs_List* list, void* item, bool checkValidPrams);
 //gets the position of the item in the List || -1 will be returned if no item is their.
-size_t CDataStructs_List_ItemPosition(CDataStructs_List* list, void* item, BOOL checkValidPrams);
+size_t CDataStructs_List_ItemPosition(CDataStructs_List* list, void* item, bool checkValidPrams);
 
 //prints the contents of the List
 void CDataStructs_List_Print(CDataStructs_List* list);
