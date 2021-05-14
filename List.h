@@ -36,7 +36,7 @@ extern "C" {
     } CDataStructs_List;
 
     //creates a List
-    //CDataStructs_List* CDataStructs_List_Create(size_t itemSize);
+    CDataStructs_List* CDataStructs_List_Create(size_t itemSize);
     //destroys a List
     void CDataStructs_List_Destroy(CDataStructs_List* list, void(*freeMethod)(void* item));
     //appends a item to the List || stops duplicates and NULL items
